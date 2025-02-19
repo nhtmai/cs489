@@ -10,17 +10,15 @@ int main(int argc, char** argv) {
         fprintf(stderr, "Please provide the address of a file as an input.\n");
         return -1;
     }
-    FILE* fp = fopen(argv[1], "r"); 
-  
-    // checking if the file exists and can be read
-    if (fp == NULL) { 
+
+    FILE* fp = fopen(argv[1], "r");  // opening file
+    if (fp == NULL) { // if opening file failed
         fprintf(stderr, "File Not Found!\n"); 
         return -1; 
     } 
     
     int seek_status = fseek(fp, 0, SEEK_END);
-    
-    if (seek_status != 0) { // moving to end of file failed
+    if (seek_status != 0) { // if moving to end of file failed
         fclose(fp);
         fprintf(stderr, "Cannot determine file size!\n");
         return -1;
@@ -28,8 +26,8 @@ int main(int argc, char** argv) {
 
     // getting size of file 
     long int file_size = ftell(fp);
-    fclose(fp);
-    if (file_size == -1L) { // if failed
+    fclose(fp); // closing file
+    if (file_size == -1L) { // if getting size failed
         fprintf(stderr, "Cannot determine file size!\n");
         return -1;
     } else {
